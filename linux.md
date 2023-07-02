@@ -1,15 +1,3 @@
-### ls 命令
-
-- -a 查看所有文件（all）
-- -l 竖向列出所有文件（list）
-- -h 以易于阅读的形式，列出文件大小，如 K、M、G，需要搭配-a 或者-l 指令一起使用
-
-```bash
-    ls -a /
-    ls -la /
-    ls -lh /
-```
-
 ### 路径
 
 | 路径         | 含义                                              | 事例                    |
@@ -64,5 +52,4 @@ ls  | grep test
 | grep [-n] keyword path                             | `grep hello text.txt` `grep -n hello text.txt` `ls -l | grep index.\*`                                                       | 从文件或者输入端口（前一个命令返回值）中通过关键字过滤文件行                          | -n 表示是否显示行数                                                                           |
 | wc [-c -m -l -w] path                              | `wc -l test.js` `wc -c test.js`                       | 从文件或者输入端口（前一个命令返回值）中获取文件的统计信息           | -c bytes 数量，-m 字符数量，-l 行数，-w 单词数量                                      |
 | echo content                                       | `echo "test content"`                                 | 输出指定内容                                                         | 被飘号"`"包围的内容，会被作为命令执行,因为可能有空格或\等特殊符号，建议使用双引号包围 |
-| tail [-f -num] path                                | `tail -f -5 test.txt` `tail -5 test.txt`              | 查看文件尾部内容                                                     | -f 表示跟踪文件更改 -num 表示查看尾部多少行。  
-                                       |
+| tail [-f -num] path                                | `tail -f -5 test.txt` `tail -5 test.txt`              | 查看文件尾部内容                                                     | -f 表示跟踪文件更改 -num 表示查看尾部多少行。                                         |
