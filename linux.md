@@ -69,9 +69,12 @@ ls  | grep test
 | 序号1 | 表示文件、文件夹的权限控制信息 |
 | 序号2 | 表示文件、文件夹所属用户       |
 | 序号3 | 表示文件、文件夹所属用户组     |
+
 **下图是上图序号1的详解 权限细节总共分为10个槽位。**
 第一个字符表示是文件夹还是文件，如果是文件夹则为d，文件则为-
 ![权限细节图](img/%E6%9D%83%E9%99%90%E7%BB%86%E8%8A%82%E5%9B%BE.png)
+
+
 | 权限 | 内容           | 数字序号 |
 | ---- | -------------- | -------- |
 | r    | 查看权限       | 4        |
@@ -99,19 +102,20 @@ ls  | grep test
 
 
 ### 操作角色API
-| 指令                           | 事例                                                                      | 内容                     | 其他说明                                                                                |
-| ------------------------------ | ------------------------------------------------------------------------- | ------------------------ | --------------------------------------------------------------------------------------- |
-| su [-] [user]                  | `su` `su - root`                                                          | 切换到指定用户           | 用户名省略默认为root用户 `-`表示切换用户后加载环境变量                                  |
-| exit                           | `exit`                                                                    | 返回上一个用户           | 也可以使用快捷键ctrl+d完成该操作                                                        |
-| sudo command                   | `sudo mkdir`                                                              | 为命令授予零时的root权限 | 只有配置了sudo认证的用户才可以使用sudo                                                  |
-| groupadd groupname             | `groupadd manager`                                                        | 创建用户组               | 只有root用户才可以创建和删除用户组                                                      |
-| groupdel groupname             | `groupdel manager`                                                        | 删除用户组               | ^                                                                                       |
-| useradd [-g -d] username       | `useradd test` `useradd -g group1 test` `useradd -g g1 user1 -d /home/u1` | 创建用户                 | -g指定group，不指定-g会创建同名组并自动加入。-d指定用户home路径，不指定默认/home/用户名 |
-| userdel [-r] username          | `userdel -r test`                                                         | 删除用户                 | 不使用-r，删除用户时，HOME目录保留                                                      |
-| id [username]                  | `id test`                                                                 | 查看用户内容             | 如果不提供则查看自身                                                                    |
-| usermod -aG groupname username | `usermod -aG g1 user1`                                                    | 将指定用户加入指定组     |
-| getent group                   | `getent group`                                                            | 查看所有用户组           | 包含3份信息，组名称:组认证(显示为x):组ID                                                |
-| getent passwd                  | `getent passwd`                                                           | 查看所有用户             | 包含7份信息，用户名:密码(x):用户ID:组ID:描述信息(无用):HOME目录:执行终端(默认bash)      |
-| chmod [-R] 权限 文件或文件夹   | `chmod -R u=rwx,g=rx,o=x test.sh` `chmod 751 test.sh`                     | 修改文件权限             | `-R`表示对文件夹的所有内容应用同样操作                                                  |
+| 指令                                      | 事例                                                                                  | 内容                               | 其他说明                                                                                                                                                       |
+| ----------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| su [-] [user]                             | `su` `su - root`                                                                      | 切换到指定用户                     | 用户名省略默认为root用户 `-`表示切换用户后加载环境变量                                                                                                         |
+| exit                                      | `exit`                                                                                | 返回上一个用户                     | 也可以使用快捷键ctrl+d完成该操作                                                                                                                               |
+| sudo command                              | `sudo mkdir`                                                                          | 为命令授予零时的root权限           | 只有配置了sudo认证的用户才可以使用sudo                                                                                                                         |
+| groupadd groupname                        | `groupadd manager`                                                                    | 创建用户组                         | 只有root用户才可以创建和删除用户组                                                                                                                             |
+| groupdel groupname                        | `groupdel manager`                                                                    | 删除用户组                         | ^                                                                                                                                                              |
+| useradd [-g -d] username                  | `useradd test` `useradd -g group1 test` `useradd -g g1 user1 -d /home/u1`             | 创建用户                           | -g指定group，不指定-g会创建同名组并自动加入。-d指定用户home路径，不指定默认/home/用户名                                                                        |
+| userdel [-r] username                     | `userdel -r test`                                                                     | 删除用户                           | 不使用-r，删除用户时，HOME目录保留                                                                                                                             |
+| id [username]                             | `id test`                                                                             | 查看用户内容                       | 如果不提供则查看自身                                                                                                                                           |
+| usermod -aG groupname username            | `usermod -aG g1 user1`                                                                | 将指定用户加入指定组               |
+| getent group                              | `getent group`                                                                        | 查看所有用户组                     | 包含3份信息，组名称:组认证(显示为x):组ID                                                                                                                       |
+| getent passwd                             | `getent passwd`                                                                       | 查看所有用户                       | 包含7份信息，用户名:密码(x):用户ID:组ID:描述信息(无用):HOME目录:执行终端(默认bash)                                                                             |
+| chmod [-R] 权限 文件或文件夹              | `chmod -R u=rwx,g=rx,o=x test.sh` `chmod 751 test.sh`                                 | 修改文件权限                       | `-R`表示对文件夹的所有内容应用同样操作                                                                                                                         |
+| chown [-R] [用户][:][用户组] 文件或文件夹 | `chown root hello.txt` `chown :groupname hello.txt`  `chown root:groupname hello.txt` | 修改文件、文件夹的所属用户和用户组 | 只有root可以使用该命令，root表示将文件所属改为root用户，:groupname表示将文件所属改为groupname用户组，root:groupname表示将文件所属改为root用户和groupname用户组 |
 
 
