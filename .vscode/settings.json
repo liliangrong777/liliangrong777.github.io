@@ -3,6 +3,7 @@
         "drwxr",
         "getent",
         "groupname",
+        "softname",
         "userdel",
         "usermod"
     ]
